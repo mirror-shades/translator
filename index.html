@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Translator</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app">
+    <header>
+      <h1>Translator</h1>
+      <p class="subtitle">Machine translate, review &amp; correct with DeepSeek, then a final coherence pass</p>
+    </header>
+
+    <section class="settings">
+      <label>
+        <span>DeepSeek API key</span>
+        <input type="password" id="apiKey" placeholder="sk-..." autocomplete="off" />
+        <span class="remember-row">
+          <input type="checkbox" id="rememberKey" />
+          <span>Remember on this device</span>
+        </span>
+      </label>
+      <label>
+        <span>Model</span>
+        <input type="text" id="model" value="deepseek-v4-flash" />
+      </label>
+      <label>
+        <span>Target language</span>
+        <select id="targetLang"></select>
+      </label>
+      <label class="glossary-field">
+        <span>Glossary (term = translation, one per line)</span>
+        <textarea id="glossary" rows="3" placeholder="Schadenfreude = malicious joy"></textarea>
+      </label>
+      <label class="check">
+        <input type="checkbox" id="finalPass" checked />
+        <span>Final coherence pass</span>
+      </label>
+    </section>
+
+    <section class="panes">
+      <div class="pane">
+        <label for="source">Source text</label>
+        <textarea id="source" placeholder="Paste text here..."></textarea>
+      </div>
+      <div class="pane">
+        <div class="pane-head">
+          <label>Result <span class="hint">(click text to edit)</span></label>
+          <div class="toolbar">
+            <button id="copyBtn" class="ghost" disabled>Copy</button>
+            <button id="exportTxtBtn" class="ghost" disabled>.txt</button>
+            <button id="exportMdBtn" class="ghost" disabled>.md</button>
+          </div>
+        </div>
+        <div id="finalOutput" class="output editable" contenteditable="true"
+             data-placeholder="Translation will appear here. Click to edit."></div>
+        <div class="footnotes-block">
+          <div class="fn-head">
+            <span>Footnotes</span>
+            <button id="addFootnoteBtn" class="ghost" disabled>+ Add</button>
+          </div>
+          <ol id="footnotesList"></ol>
+          <p id="footnotesHint" class="placeholder">No footnotes.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="review" id="reviewSection" hidden>
+      <h2>Section review</h2>
+      <p class="subtitle">Draft per section — re-roll any section you're not happy with.</p>
+      <div id="sections"></div>
+    </section>
+
+    <div class="controls">
+      <button id="translateBtn">Translate</button>
+      <button id="stopBtn" class="stop" hidden>Stop</button>
+      <span id="status"></span>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
