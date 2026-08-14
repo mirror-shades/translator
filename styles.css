@@ -297,6 +297,16 @@ button.ghost:disabled { color: #a5b4d0; cursor: not-allowed; background: transpa
 .section.failed { border-color: #fca5a5; background: #fef2f2; }
 .error-text { color: var(--danger); }
 
+.warn {
+  margin-top: 6px;
+  font-size: 0.78rem;
+  color: #9a6700;
+  background: #fff8e1;
+  border: 1px solid #f5e6b8;
+  border-radius: 6px;
+  padding: 4px 8px;
+}
+
 @media (max-width: 720px) {
   .panes { grid-template-columns: 1fr; }
   .section-cols { grid-template-columns: 1fr; }

@@ -10,7 +10,7 @@
   <main class="app">
     <header>
       <h1>Translator</h1>
-      <p class="subtitle">Machine translate, review &amp; correct with DeepSeek, then a final coherence pass</p>
+      <p class="subtitle">Direct LLM translation with glossary, register control and aligned review</p>
     </header>
 
     <section class="settings">
@@ -27,22 +27,42 @@
         <input type="text" id="model" value="deepseek-v4-flash" />
       </label>
       <label>
+        <span>Draft source</span>
+        <select id="draftSource"></select>
+      </label>
+      <label>
+        <span>Source language</span>
+        <select id="sourceLang"></select>
+      </label>
+      <label>
         <span>Target language</span>
         <select id="targetLang"></select>
       </label>
+      <label>
+        <span>Register</span>
+        <select id="register"></select>
+      </label>
       <label class="glossary-field">
-        <span>Glossary (term = translation, one per line)</span>
-        <textarea id="glossary" rows="3" placeholder="Schadenfreude = malicious joy"></textarea>
+        <span>Glossary (term (hint) = translation, one per line)</span>
+        <textarea id="glossary" rows="3" placeholder="bank (finance) = banque"></textarea>
       </label>
       <label class="check">
-        <input type="checkbox" id="finalPass" checked />
-        <span>Final coherence pass</span>
+        <input type="checkbox" id="protectNames" checked />
+        <span>Protect names</span>
+      </label>
+      <label class="check">
+        <input type="checkbox" id="faithful" />
+        <span>Faithful (literal draft → revise)</span>
+      </label>
+      <label class="check">
+        <input type="checkbox" id="finalPass" />
+        <span>Reconcile pass</span>
       </label>
     </section>
 
     <section class="panes">
       <div class="pane">
-        <label for="source">Source text</label>
+        <label for="source">Source text <span class="hint">(select text to translate a subset)</span></label>
         <textarea id="source" placeholder="Paste text here..."></textarea>
       </div>
       <div class="pane">
@@ -68,8 +88,8 @@
     </section>
 
     <section class="review" id="reviewSection" hidden>
-      <h2>Section review</h2>
-      <p class="subtitle">Draft per section — re-roll any section you're not happy with.</p>
+      <h2>Segment review</h2>
+      <p class="subtitle">Source &harr; translation per sentence. Re-roll any segment.</p>
       <div id="sections"></div>
     </section>
 
